@@ -1,0 +1,22 @@
+步骤1:
+使用git bash执行
+openssl pkcs8 -inform DER -nocrypt -in testkey.pk8 -out testkey.pem
+
+步骤2:
+别名为name
+openssl pkcs12 -export -in "testkey.x509.pem" -inkey "testkey.pem" -name "grover" -password pass:android -out "testkey.p12"
+
+步骤3:
+keytool -importkeystore -deststorepass android -srckeystore "testkey.p12" -srcstoretype PKCS12 -srcstorepass android -destkeystore "testkey.keystore"
+
+// 查看详情
+keytool -list -v -keystore "testkey.keystore"
+
+// 对应文件参考
+ case $certserial in
+    C2E08746644A308D) title="Google";;
+    936EACBE07F201DF) title="SDK Test Key";;
+    F2B98E6123572C4E) title="SDK Media Key";;
+    B3998086D056CFFA) title="SDK Platform Key";;
+    F2A73396BD38767A) title="SDK Shared Key";;
+    *) title="unknown $2";
